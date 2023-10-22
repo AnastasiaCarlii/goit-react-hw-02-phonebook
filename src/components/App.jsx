@@ -4,6 +4,7 @@ import { nanoid } from 'nanoid';
 
 import css from './App.module.css';
 import ContactForm from './ContactForm/ContactForm';
+import { SearchFilter } from './SearchFilter/SearchFilter';
 
 class App extends Component {
   state = {
@@ -35,12 +36,21 @@ class App extends Component {
     }));
   };
 
+  changeFilter = e => {
+    this.setState({
+      filter: e.currentTarget.value,
+    });
+  };
+
   render() {
-    // const { filter, contacts } = this.state;
+    const { filter } = this.state;
     return (
       <div className={css.container}>
         <h1>Phonebook</h1>
         <ContactForm onSubmit={this.formSubmitData} />
+
+        <h2>Contacts</h2>
+        <SearchFilter value={filter} onChange={this.changeFilter} />
       </div>
     );
   }

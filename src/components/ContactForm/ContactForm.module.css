@@ -1,12 +1,14 @@
 .formContainer {
   padding: 15px 25px 30px;
-  border: none;
+  border: 1px solid black;
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 .formInput {
   display: flex;
+  margin-top: 15px;
+  border: 1px solid grey;
 
   font-size: 14px;
   color: black;
