@@ -5,6 +5,7 @@ import { nanoid } from 'nanoid';
 import css from './App.module.css';
 import ContactForm from './ContactForm/ContactForm';
 import { SearchFilter } from './SearchFilter/SearchFilter';
+import { ContactList } from './ContactList/ContactList';
 
 class App extends Component {
   state = {
@@ -42,6 +43,12 @@ class App extends Component {
     });
   };
 
+  filterContacts = () => {
+    const { contacts, filter } = this.state;
+
+    return contacts.filter(contact => contact.name.includes(filter));
+  };
+
   render() {
     const { filter } = this.state;
     return (
@@ -51,6 +58,7 @@ class App extends Component {
 
         <h2>Contacts</h2>
         <SearchFilter value={filter} onChange={this.changeFilter} />
+        <ContactList contacts={this.filterContacts()} />
       </div>
     );
   }
