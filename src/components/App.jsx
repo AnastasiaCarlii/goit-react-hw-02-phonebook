@@ -20,10 +20,15 @@ class App extends Component {
 
   formSubmitData = data => {
     const currentContact = this.state.contacts.find(
-      contact => contact.name.toLowerCase() === data.name.toLowerCase()
+      contact =>
+        contact.name.toLowerCase() === data.name.toLowerCase() ||
+        contact.number === data.number
     );
     if (currentContact) {
-      alert(`${currentContact.name} is already in your contacts`);
+      alert(
+        `${currentContact.name} or ${currentContact.number} is already in your contacts`
+      );
+
       return;
     }
 
@@ -46,7 +51,15 @@ class App extends Component {
   filterContacts = () => {
     const { contacts, filter } = this.state;
 
-    return contacts.filter(contact => contact.name.includes(filter));
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filter.toLowerCase())
+    );
+  };
+
+  deleteContacts = id => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== id),
+    }));
   };
 
   render() {
@@ -55,10 +68,22 @@ class App extends Component {
       <div className={css.container}>
         <h1>Phonebook</h1>
         <ContactForm onSubmit={this.formSubmitData} />
-
         <h2>Contacts</h2>
-        <SearchFilter value={filter} onChange={this.changeFilter} />
-        <ContactList contacts={this.filterContacts()} />
+        {this.state.contacts.length > 0 && (
+          <SearchFilter value={filter} onChange={this.changeFilter} />
+        )}
+
+        {this.filterContacts().length > 0 ? (
+          <>
+            {' '}
+            <ContactList
+              contacts={this.filterContacts()}
+              onDelete={this.deleteContacts}
+            />
+          </>
+        ) : (
+          <p>you dont have contacts</p>
+        )}
       </div>
     );
   }

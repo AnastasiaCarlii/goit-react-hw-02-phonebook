@@ -27,24 +27,28 @@ class ContactForm extends Component {
         <label>
           Name
           <input
+            pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             className={css.formInput}
             autoComplete="off"
             type="text"
             name="name"
             value={name}
             onChange={this.handleChange}
+            required
           />
         </label>
 
         <label>
           Number
           <input
+            pattern="\+?\d{1,4}?[ .\-\s]?\(?\d{1,3}?\)?[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,9}"
             className={css.formInput}
             autoComplete="off"
             type="text"
             name="number"
             value={number}
             onChange={this.handleChange}
+            required
           />
         </label>
 
