@@ -25,9 +25,7 @@ class App extends Component {
         contact.number === data.number
     );
     if (currentContact) {
-      alert(
-        `${currentContact.name} or ${currentContact.number} is already in your contacts`
-      );
+      alert(`${data.name} or ${data.number} is already in your contacts`);
 
       return;
     }
